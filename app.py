@@ -1,13 +1,28 @@
 from curses.panel import bottom_panel
 from distutils.log import debug
 from unicodedata import name
-from flask import Flask, render_template,request
 
-app = Flask(__name___)
+app = Flask(__name__)
 
 @app.route("/")
 def top_page():
     return render_template("index.html")
+
+
+if __name__ == "___main___":
+    app.run(debug=True)
+
+from flask import Flask, render_template, request
+
+@app.route("/circle_input")
+def circle_input():
+    return render_template("circle_input.html")
+
+@app.route("/circle_result")
+def circle_result():
+    radius = int(request.args.get("radius"))
+    result = 3.14 * radius ** 2
+    return render_template("circle_result",result=result)
 
 if __name___ == "___main___":
     app.run(debug=True)
@@ -22,3 +37,4 @@ def square_result():
     bottom = int(request.args.get("bottom"))
     result = height * bottom
     return render_template("square_result.html" , result=result)
+
